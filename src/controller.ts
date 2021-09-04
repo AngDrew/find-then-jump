@@ -11,7 +11,7 @@ import {Association} from './association'
 
 class Controller {
   static generateValidJumpChars: () => string[]
-    = () => [...'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ']
+    = () => [...'abcdefghijklmnopqrstuvwxyz']
 
   textEditor: TextEditor | any
   inputBox: InputBox | any
