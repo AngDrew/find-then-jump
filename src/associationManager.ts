@@ -5,6 +5,7 @@ import {
 
 import {Association} from './Association'
 import {Match} from './documentScanner'
+import {ScannerState} from './documentScanner'
 
 export class AssociationManager {
   private activeAssociations: Map<string, Association>
@@ -19,7 +20,14 @@ export class AssociationManager {
     textEditor: TextEditor
   ) => {
     const {lineIndex, matchStartIndex, matchEndIndex} = match
-    const selection = new Range(lineIndex, matchStartIndex, lineIndex, matchEndIndex)
+    
+    let selection;
+    
+    if(scannerState == ScanDirection.Down){
+      selection = new Range(lineIndex, matchStartIndex, lineIndex, matchEndIndex + 1)
+    } else {
+      selection = new Range(lineIndex, matchStartIndex, lineIndex, matchEndIndex)
+    }
     const association = new Association(letter, selection, lineIndex, matchStartIndex)
     const {foreground, background} = association.getDecorations()
     const {foregroundRange, backgroundRange} = association.getRanges()
